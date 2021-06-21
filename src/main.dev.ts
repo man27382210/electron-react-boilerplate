@@ -16,6 +16,8 @@ import { autoUpdater } from 'electron-updater';
 import log from 'electron-log';
 import MenuBuilder from './menu';
 
+const contextMenu = require('electron-context-menu');
+
 export default class AppUpdater {
   constructor() {
     log.transports.file.level = 'info';
@@ -76,6 +78,7 @@ const createWindow = async () => {
     webPreferences: {
       nodeIntegration: true,
       webviewTag: true,
+      spellcheck: true,
     },
   });
 
@@ -131,4 +134,24 @@ app.on('activate', () => {
   // On macOS it's common to re-create a window in the app when the
   // dock icon is clicked and there are no other windows open.
   if (mainWindow === null) createWindow();
+});
+
+app.on('web-contents-created', (_e: Electron.Event, contents) => {
+  if (contents.getType() === 'webview') {
+    // open link with external browser in webview
+    contents.on('new-window', (e, url) => {
+      e.preventDefault();
+      shell.openExternal(url);
+    });
+    // set context menu in webview
+    contextMenu({
+      prepend: (_defaultActions: any, params: any, _browserWindow: any) => [
+        {
+          label: 'Rainbow',
+          visible: params.mediaType === 'image',
+        },
+      ],
+      window: contents,
+    });
+  }
 });
