@@ -4782,6 +4782,11 @@ electron-notarize@^1.0.0:
     debug "^4.1.1"
     fs-extra "^9.0.1"
 
+electron-notification-shim@^1.1.0:
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/electron-notification-shim/-/electron-notification-shim-1.1.0.tgz#5a33ae43a8750ea52c701ea7144d5fd7b6c9793a"
+  integrity sha1-WjOuQ6h1DqUscB6nFE1f17bJeTo=
+
 electron-publish@22.11.7:
   version "22.11.7"
   resolved "https://registry.yarnpkg.com/electron-publish/-/electron-publish-22.11.7.tgz#4126cbb08ccf082a2aa7fef89ee629b3a4b8ae9a"
